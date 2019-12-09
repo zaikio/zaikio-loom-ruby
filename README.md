@@ -1,8 +1,8 @@
-# Zaikami::Loom
+# Zaikami Loom Ruby Gem
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/zaikami/loom`. To experiment with that code, run `bin/console` for an interactive prompt.
+Zaikami Loom Ruby Gem simplifies publishing events on the Zaikami Loom event system.
 
-TODO: Delete this and the text above, and describe your gem
+Applications can only publish events to Zaikami Loom which have been configured in the Zaikami Directory. With a developer account in the Zaikami Directory you will find the list of provided events in your App's configuration in the Directory.
 
 ## Installation
 
@@ -22,7 +22,60 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Configuration
+
+To configure the gem add an initializer to your application:
+
+```ruby
+# in config/initializers/zaikami-loom.rb
+Zaikami::Loom.configure do |config|
+  # Environment to which the gem should publish events to.
+  # Possible values: :development, :test, :staging, :sandbox (default), :production
+  config.environment = :sandbox
+
+  # The name of your application like it is named in the directory of the
+  # choosen enviroment.
+  config.name = 'my_application'
+
+  # Your application's event password for the choosen environment
+  # Do not add this password into version control.
+  config.password = ENV.fetch('ZAIKAMI_LOOM_PASSWORD')
+
+  # The version of the event's payload format and structure
+  config.version = '1.0'
+end
+```
+
+### Usage
+
+Firing events to Zaikami Loom:
+
+```ruby
+Zaikami::Loom.fire_event(:event_name, payload: { foo: 'bar', baz: [1, 2, 3] })
+```
+
+This example would publish an event to Zaikami Loom with a random UUID and the current timestamp.
+
+If you need more control over the published event, for example:
+
+  - to provide a specific unique UUID or timestamp in the past or
+  - you want to override the version for this specific event or
+  - you want to check the Loom's response to this request
+
+then you can use the method:
+
+```ruby
+event = Zaikami::Loom::Event.new(:event_name,
+                                  id: 'f5cecfce-eda7-4eae-a0b2-62da7d51e8a2',
+                                  payload: { foo: 'bar', baz: [1, 2, 3] },
+                                  timestamp: Time.current,
+                                  version: '1.1.beta')
+
+unless event.fire         # imaging the event_name does not exist
+  event.error_code        # => 422
+  event.error_message     # => { "errors": { "name": ["excludes a valid event name"] } }
+end
+```
 
 ## Development
 
@@ -40,4 +93,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Zaikami::Loom project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/crispymtn/zai-loom-ruby/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Zaikami Loom Ruby gem project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/crispymtn/zai-loom-ruby/blob/master/CODE_OF_CONDUCT.md).
