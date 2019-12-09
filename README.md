@@ -1,6 +1,6 @@
 # Zaikami Loom Ruby Gem
 
-Zaikami Loom Ruby Gem simplifies publishing events on the Zaikami Loom event system.
+The Zaikami Loom Ruby Gem simplifies publishing events on the Zaikami Loom event system.
 
 Applications can only publish events to Zaikami Loom which have been configured in the Zaikami Directory. With a developer account in the Zaikami Directory you will find the list of provided events in your App's configuration in the Directory.
 
@@ -30,12 +30,12 @@ To configure the gem add an initializer to your application:
 # in config/initializers/zaikami-loom.rb
 Zaikami::Loom.configure do |config|
   # Environment to which the gem should publish events to.
-  # Possible values: :development, :test, :staging, :sandbox (default), :production
+  # Possible values: :sandbox (default), :production
   config.environment = :sandbox
 
   # The name of your application like it is named in the directory of the
   # choosen enviroment.
-  config.name = 'my_application'
+  config.app_name = 'my_application'
 
   # Your application's event password for the choosen environment
   # Do not add this password into version control.
@@ -72,8 +72,8 @@ event = Zaikami::Loom::Event.new(:event_name,
                                   version: '1.1.beta')
 
 unless event.fire         # imaging the event_name does not exist
-  event.error_code        # => 422
-  event.error_message     # => { "errors": { "name": ["excludes a valid event name"] } }
+  event.status_code       # => 422
+  event.response_body     # => '{ "errors": { "name": ["excludes a valid event name"] } }'
 end
 ```
 
