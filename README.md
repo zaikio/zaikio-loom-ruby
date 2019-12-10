@@ -9,7 +9,7 @@ Applications can only publish events to Zaikami Loom which have been configured 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'zaikami-loom'
+gem 'zaikami-loom', git: 'https://github.com/crispymtn/zai-loom-ruby'
 ```
 
 And then execute:
