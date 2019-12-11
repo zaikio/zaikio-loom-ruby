@@ -14,27 +14,31 @@ module Zaikami
         @link       = link
         @timestamp  = timestamp
         @version    = version || configuration.version
+
+        return if configuration.password
+
+        configuration.logger.error("Zaikami::Loom is disabled – event password is missing")
       end
 
       def fire
-        if configuration.host
-          uri = URI("#{configuration.host}/api/v1/events")
+        return false unless configuration.password && configuration.host
 
-          http = Net::HTTP.new(uri.host, uri.port)
-          http.use_ssl = uri.scheme == "https"
+        uri = URI("#{configuration.host}/api/v1/events")
 
-          request = Net::HTTP::Post.new(uri, "User-Agent" => "zaikami-loom:#{Zaikami::Loom::VERSION}")
-          request.basic_auth(configuration.app_name, configuration.password)
-          request.body         = event_as_json
-          request.content_type = "application/json"
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = uri.scheme == "https"
 
-          response = http.request(request)
+        request = Net::HTTP::Post.new(uri, "User-Agent" => "zaikami-loom:#{Zaikami::Loom::VERSION}")
+        request.basic_auth(configuration.app_name, configuration.password)
+        request.body         = event_as_json
+        request.content_type = "application/json"
 
-          @status_code   = response.code.to_i
-          @response_body = response.body
+        response = http.request(request)
 
-          response.is_a?(Net::HTTPSuccess)
-        end
+        @status_code   = response.code.to_i
+        @response_body = response.body
+
+        response.is_a?(Net::HTTPSuccess)
       end
 
       private

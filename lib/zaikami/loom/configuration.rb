@@ -1,3 +1,5 @@
+require "logger"
+
 module Zaikami
   module Loom
     class Configuration
@@ -11,9 +13,14 @@ module Zaikami
 
       attr_accessor :app_name, :password, :version
       attr_reader :environment, :host
+      attr_writer :logger
 
       def initialize
         @environment = :sandbox
+      end
+
+      def logger
+        @logger ||= Logger.new(STDOUT)
       end
 
       def environment=(environment)
