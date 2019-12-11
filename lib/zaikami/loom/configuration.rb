@@ -23,8 +23,8 @@ module Zaikami
         @logger ||= Logger.new(STDOUT)
       end
 
-      def environment=(environment)
-        @environment = environment.to_sym
+      def environment=(env)
+        @environment = env.to_sym
         @host = host_for(environment)
       end
 
