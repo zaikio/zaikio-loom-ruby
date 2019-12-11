@@ -27,7 +27,7 @@ Or install it yourself as:
 To configure the gem add an initializer to your application:
 
 ```ruby
-# in config/initializers/zaikami-loom.rb
+# in config/initializers/zaikami_loom.rb
 Zaikami::Loom.configure do |config|
   # Environment to which the gem should publish events to.
   # Possible values: :sandbox (default), :production
