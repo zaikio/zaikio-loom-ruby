@@ -7,8 +7,9 @@ module Zaikami
     class Event
       attr_reader :status_code, :response_body
 
-      def initialize(name, payload:, id: nil, link: nil, timestamp: nil, version: nil)
+      def initialize(name, bearer:, id: nil, link: nil, payload: nil, timestamp: nil, version: nil)
         @event_name = "#{configuration.app_name}.#{name}"
+        @bearer     = bearer
         @payload    = payload
         @id         = id || SecureRandom.uuid
         @link       = link
@@ -56,6 +57,7 @@ module Zaikami
               id: @id,
               timestamp: timestamp.iso8601,
               name: @event_name,
+              bearer: @bearer,
               version: @version,
               payload: @payload,
               link: @link

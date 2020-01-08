@@ -51,7 +51,11 @@ end
 Firing events to Zaikami Loom:
 
 ```ruby
-Zaikami::Loom.fire_event(:event_name, payload: { foo: 'bar', baz: [1, 2, 3] })
+Zaikami::Loom.fire_event(
+  :event_name,
+  bearer: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
+  payload: { foo: 'bar', baz: [1, 2, 3] }
+)
 ```
 
 This example would publish an event to Zaikami Loom with a random UUID and the current timestamp.
@@ -65,17 +69,36 @@ If you need more control over the published event, for example:
 then you can use the method:
 
 ```ruby
-event = Zaikami::Loom::Event.new(:event_name,
-                                  id: 'f5cecfce-eda7-4eae-a0b2-62da7d51e8a2',
-                                  payload: { foo: 'bar', baz: [1, 2, 3] },
-                                  timestamp: Time.current,
-                                  version: '1.1.beta')
+event = Zaikami::Loom::Event.new(
+  :event_name,
+  bearer: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
+  id: 'f5cecfce-eda7-4eae-a0b2-62da7d51e8a2',
+  payload: { foo: 'bar', baz: [1, 2, 3] },
+  timestamp: Time.current,
+  version: '1.1.beta'
+)
 
 unless event.fire         # imaging the event_name does not exist
   event.status_code       # => 422
   event.response_body     # => '{ "errors": { "name": ["excludes a valid event name"] } }'
 end
 ```
+
+### Required arguments
+
+This gem is able to add some defaults or fallback values to the requests against the Loom API, for example
+
+  - the app name,
+  - an unique `id`,
+  - the `version` or
+  - the current `timestamp`.
+
+Nevertheless, the following arguments are required for every fired event and must follow the conventions described in the [Loom API Guide](https://docs.zaiku.cloud/guide/loom/posting-events.html#payload-requirements):
+
+  - the name of the event
+  - a `bearer` that triggered the event
+
+Furtheremore, the payload can be omitted, but must be a hash when present.
 
 ## Development
 
