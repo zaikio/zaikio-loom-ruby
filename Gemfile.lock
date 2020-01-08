@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     zaikami-loom (0.1.0.beta)
+      oj
 
 GEM
   remote: https://rubygems.org/
@@ -27,7 +28,6 @@ PLATFORMS
 DEPENDENCIES
   bundler
   minitest
-  oj
   rake
   webmock
   zaikami-loom!
