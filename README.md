@@ -53,7 +53,7 @@ Firing events to Zaikami Loom:
 ```ruby
 Zaikami::Loom.fire_event(
   :event_name,
-  bearer: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
+  subject: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
   payload: { foo: 'bar', baz: [1, 2, 3] }
 )
 ```
@@ -71,7 +71,7 @@ then you can use the method:
 ```ruby
 event = Zaikami::Loom::Event.new(
   :event_name,
-  bearer: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
+  subject: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
   id: 'f5cecfce-eda7-4eae-a0b2-62da7d51e8a2',
   payload: { foo: 'bar', baz: [1, 2, 3] },
   timestamp: Time.current,
@@ -96,7 +96,7 @@ This gem is able to add some defaults or fallback values to the requests against
 Nevertheless, the following arguments are required for every fired event and must follow the conventions described in the [Loom API Guide](https://docs.zaiku.cloud/guide/loom/posting-events.html#payload-requirements):
 
   - the name of the event
-  - a `bearer` that triggered the event
+  - a `subject` that triggered the event
 
 Furtheremore, the payload can be omitted, but must be a hash when present.
 
