@@ -1,4 +1,4 @@
-# Zaikami Loom Ruby Gem Changelog
+# Zaikio Loom Ruby Gem Changelog
 
 
-## 0.1.0 First release
+## 0.1.0 Initial release

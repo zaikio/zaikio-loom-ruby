@@ -1,16 +1,16 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "zaikami/loom/version"
+require "zaikio/loom/version"
 
 Gem::Specification.new do |spec|
-  spec.name     = "zaikami-loom"
-  spec.version  = Zaikami::Loom::VERSION
+  spec.name     = "zaikio-loom"
+  spec.version  = Zaikio::Loom::VERSION
 
   spec.authors  = ["crispymtn", "Martin Spickermann"]
   spec.email    = ["op@crispymtn.com", "spickermann@gmail.com"]
   spec.homepage = "https://github.com/crispymtn/zai-loom-ruby"
   spec.license  = "MIT"
-  spec.summary  = "The Zaikami Loom Ruby Gem simplifies publishing events on the Zaikami Loom event system."
+  spec.summary  = "The Zaikio Loom Ruby Gem simplifies publishing events on the Zaikio Loom event system."
 
   spec.metadata["changelog_uri"] = "https://github.com/crispymtn/zai-loom-ruby/blob/master/CHANGELOG.md"
   spec.metadata["homepage_uri"] = spec.homepage

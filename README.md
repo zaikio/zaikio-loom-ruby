@@ -1,15 +1,15 @@
-# Zaikami Loom Ruby Gem
+# Zaikio Loom Ruby Gem
 
-The Zaikami Loom Ruby Gem simplifies publishing events on the Zaikami Loom event system.
+The Zaikio Loom Ruby Gem simplifies publishing events on the Zaikio Loom event system.
 
-Applications can only publish events to Zaikami Loom which have been configured in the Zaikami Directory. With a developer account in the Zaikami Directory you will find the list of provided events in your App's configuration in the Directory.
+Applications can only publish events to Zaikio Loom which have been configured in the Zaikio Directory. With a developer account in the Zaikio Directory you will find the list of provided events in your App's configuration in the Directory.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'zaikami-loom', git: 'https://github.com/crispymtn/zai-loom-ruby'
+gem 'zaikio-loom', git: 'https://github.com/crispymtn/zai-loom-ruby'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install zaikami-loom
+    $ gem install zaikio-loom
 
 ## Usage
 
@@ -27,8 +27,8 @@ Or install it yourself as:
 To configure the gem add an initializer to your application:
 
 ```ruby
-# in config/initializers/zaikami_loom.rb
-Zaikami::Loom.configure do |config|
+# in config/initializers/zaikio_loom.rb
+Zaikio::Loom.configure do |config|
   # Environment to which the gem should publish events to.
   # Possible values: :sandbox (default), :production
   config.environment = :sandbox
@@ -48,17 +48,17 @@ end
 
 ### Usage
 
-Firing events to Zaikami Loom:
+Firing events to Zaikio Loom:
 
 ```ruby
-Zaikami::Loom.fire_event(
+Zaikio::Loom.fire_event(
   :event_name,
   subject: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
   payload: { foo: 'bar', baz: [1, 2, 3] }
 )
 ```
 
-This example would publish an event to Zaikami Loom with a random UUID and the current timestamp.
+This example would publish an event to Zaikio Loom with a random UUID and the current timestamp.
 
 If you need more control over the published event, for example:
 
@@ -69,7 +69,7 @@ If you need more control over the published event, for example:
 then you can use the method:
 
 ```ruby
-event = Zaikami::Loom::Event.new(
+event = Zaikio::Loom::Event.new(
   :event_name,
   subject: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
   id: 'f5cecfce-eda7-4eae-a0b2-62da7d51e8a2',
@@ -93,7 +93,7 @@ This gem is able to add some defaults or fallback values to the requests against
   - the `version` or
   - the current `timestamp`.
 
-Nevertheless, the following arguments are required for every fired event and must follow the conventions described in the [Loom API Guide](https://docs.zaiku.cloud/guide/loom/posting-events.html#payload-requirements):
+Nevertheless, the following arguments are required for every fired event and must follow the conventions described in the [Loom API Guide](https://docs.zaiku.com/guide/loom/posting-events.html#payload-requirements):
 
   - the name of the event
   - a `subject` that triggered the event
@@ -116,4 +116,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Zaikami Loom Ruby gem project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/crispymtn/zai-loom-ruby/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Zaikio Loom Ruby gem project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/crispymtn/zai-loom-ruby/blob/master/CODE_OF_CONDUCT.md).

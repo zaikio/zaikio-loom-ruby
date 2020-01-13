@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in zaikami-loom.gemspec
+# Specify your gem's dependencies in zaikio-loom.gemspec
 gemspec

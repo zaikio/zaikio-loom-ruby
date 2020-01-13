@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zaikami-loom (0.1.0.beta)
+    zaikio-loom (0.1.0.beta)
       oj
 
 GEM
@@ -30,7 +30,7 @@ DEPENDENCIES
   minitest
   rake
   webmock
-  zaikami-loom!
+  zaikio-loom!
 
 BUNDLED WITH
    2.0.2

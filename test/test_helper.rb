@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
-require "zaikami/loom"
+require "zaikio/loom"
 
 require "minitest/autorun"
 require "minitest/mock"

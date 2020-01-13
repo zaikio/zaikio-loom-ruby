@@ -2,7 +2,7 @@ require "net/http"
 require "oj"
 require "securerandom"
 
-module Zaikami
+module Zaikio
   module Loom
     class Event
       attr_reader :status_code, :response_body
@@ -18,7 +18,7 @@ module Zaikami
 
         return if configuration.password
 
-        configuration.logger.error("Zaikami::Loom is disabled – event password is missing")
+        configuration.logger.error("Zaikio::Loom is disabled – event password is missing")
       end
 
       def fire
@@ -29,7 +29,7 @@ module Zaikami
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = uri.scheme == "https"
 
-        request = Net::HTTP::Post.new(uri, "User-Agent" => "zaikami-loom:#{Zaikami::Loom::VERSION}")
+        request = Net::HTTP::Post.new(uri, "User-Agent" => "zaikio-loom:#{Zaikio::Loom::VERSION}")
         request.basic_auth(configuration.app_name, configuration.password)
         request.body         = event_as_json
         request.content_type = "application/json"
@@ -45,7 +45,7 @@ module Zaikami
       private
 
       def configuration
-        Zaikami::Loom.configuration
+        Zaikio::Loom.configuration
       end
 
       def event_as_json
