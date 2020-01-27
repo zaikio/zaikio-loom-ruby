@@ -7,12 +7,13 @@ module Zaikio
     class Event
       attr_reader :status_code, :response_body
 
-      def initialize(name, subject:, id: nil, link: nil, payload: nil, timestamp: nil, version: nil)
+      def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil)
         @event_name = "#{configuration.app_name}.#{name}"
-        @subject    = subject
-        @payload    = payload
         @id         = id || SecureRandom.uuid
         @link       = link
+        @payload    = payload
+        @receiver   = receiver
+        @subject    = subject
         @timestamp  = timestamp
         @version    = version || configuration.version
 
@@ -55,13 +56,14 @@ module Zaikio
           {
             event: {
               id: @id,
-              timestamp: timestamp.iso8601,
               name: @event_name,
               subject: @subject,
+              timestamp: timestamp.iso8601,
+              receiver: @receiver,
               version: @version,
               payload: @payload,
               link: @link
-            }
+            }.compact
           },
           mode: :compat
         )
