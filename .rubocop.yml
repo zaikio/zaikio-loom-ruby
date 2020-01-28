@@ -1,0 +1,27 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - test/**/*.rb
+
+require:
+  - rubocop-performance
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+
+Layout/LineLength:
+  Max: 119 # line length on GitHub's PR pages
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - test/**/*.rb
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes

@@ -13,10 +13,10 @@ class Zaikio::LoomTest < Minitest::Test
       config.version = "1.2.3"
     end
 
-    assert_equal :test,               Zaikio::Loom.configuration.environment
-    assert_equal "test_app",          Zaikio::Loom.configuration.app_name
-    assert_equal "secret",            Zaikio::Loom.configuration.password
-    assert_equal "1.2.3",             Zaikio::Loom.configuration.version
+    assert_equal :test,              Zaikio::Loom.configuration.environment
+    assert_equal "test_app",         Zaikio::Loom.configuration.app_name
+    assert_equal "secret",           Zaikio::Loom.configuration.password
+    assert_equal "1.2.3",            Zaikio::Loom.configuration.version
     assert_match "loom.zaikio.test", Zaikio::Loom.configuration.host
   end
 
