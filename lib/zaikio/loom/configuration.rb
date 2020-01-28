@@ -1,14 +1,14 @@
 require "logger"
 
-module Zaikami
+module Zaikio
   module Loom
     class Configuration
       HOSTS = {
-        development: "http://loom.zaikami.test",
-        test:        "http://loom.zaikami.test",
-        staging:     "https://loom.staging.zaikami.cloud",
-        sandbox:     "https://loom.sandbox.zaikami.cloud",
-        production:  "https://loom.zaikami.cloud"
+        development: "http://loom.zaikio.test",
+        test:        "http://loom.zaikio.test",
+        staging:     "https://loom.staging.zaikio.com ",
+        sandbox:     "https://loom.sandbox.zaikio.com ",
+        production:  "https://loom.zaikio.com"
       }.freeze
 
       attr_accessor :app_name, :password, :version
@@ -32,7 +32,7 @@ module Zaikami
 
       def host_for(environment)
         HOSTS.fetch(environment) do
-          raise StandardError.new, "Invalid Zaikami::Loom environment '#{environment}'"
+          raise StandardError.new, "Invalid Zaikio::Loom environment '#{environment}'"
         end
       end
     end

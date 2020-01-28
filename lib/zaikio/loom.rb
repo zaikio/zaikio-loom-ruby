@@ -1,8 +1,8 @@
-require "zaikami/loom/configuration"
-require "zaikami/loom/event"
-require "zaikami/loom/version"
+require "zaikio/loom/configuration"
+require "zaikio/loom/event"
+require "zaikio/loom/version"
 
-module Zaikami
+module Zaikio
   module Loom
     class << self
       attr_accessor :configuration
