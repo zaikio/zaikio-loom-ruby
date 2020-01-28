@@ -9,7 +9,7 @@ Applications can only publish events to Zaikio Loom which have been configured i
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'zaikio-loom', git: 'https://github.com/crispymtn/zai-loom-ruby'
+gem 'zaikio-loom'
 ```
 
 And then execute:
@@ -39,7 +39,7 @@ Zaikio::Loom.configure do |config|
 
   # Your application's event password for the choosen environment
   # Do not add this password into version control.
-  config.password = ENV.fetch('ZAIKAMI_LOOM_PASSWORD')
+  config.password = ENV.fetch('ZAIKIO_LOOM_PASSWORD')
 
   # The version of the event's payload format and structure
   config.version = '1.0'
