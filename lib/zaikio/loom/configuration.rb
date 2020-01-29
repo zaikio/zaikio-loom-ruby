@@ -6,8 +6,8 @@ module Zaikio
       HOSTS = {
         development: "http://loom.zaikio.test",
         test:        "http://loom.zaikio.test",
-        staging:     "https://loom.staging.zaikio.com ",
-        sandbox:     "https://loom.sandbox.zaikio.com ",
+        staging:     "https://loom.staging.zaikio.com",
+        sandbox:     "https://loom.sandbox.zaikio.com",
         production:  "https://loom.zaikio.com"
       }.freeze
 
