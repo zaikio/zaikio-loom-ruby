@@ -1,6 +1,18 @@
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
-require "zaikio/loom"
+# Configure Rails Environment
+ENV["RAILS_ENV"] = "test"
 
-require "minitest/autorun"
+require_relative "../test/dummy/config/environment"
+require "rails/test_help"
+require "mocha/minitest"
 require "minitest/mock"
 require "webmock/minitest"
+require_relative "../app/jobs/zaikio/loom/fire_event_job"
+
+# Filter out the backtrace from minitest while preserving the one from other libraries.
+Minitest.backtrace_filter = Minitest::BacktraceFilter.new
+
+require "rails/test_unit/reporter"
+Rails::TestUnitReporter.executable = "bin/test"
+
+class ActiveSupport::TestCase
+end
