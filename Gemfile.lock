@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zaikio-loom (0.1.1)
+    zaikio-loom (0.2.0)
       oj
       rails (~> 6.0, >= 6.0.2.2)
 
