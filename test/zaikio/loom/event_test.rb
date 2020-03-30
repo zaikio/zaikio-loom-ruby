@@ -19,7 +19,7 @@ class Zaikio::Loom::EventTest < Minitest::Test
   def test_that_it_returns_true_on_success
     stub_request(:post, "http://loom.zaikio.test/api/v1/events")
       .with(
-        body: "{\"event\":{\"id\":\"a50e4163-98b9-4179-94c1-d7a54f9b00b0\",\"name\":\"test_app.name\",\"subject\":\"Per/bb23d602-d585-43e8-a9b6-3dda50c2d09e\",\"timestamp\":\"2019-12-10T12:18:44+01:00\",\"version\":\"1.2.3\",\"payload\":{}}}",
+        body: "{\"event\":{\"id\":\"a50e4163-98b9-4179-94c1-d7a54f9b00b0\",\"name\":\"test_app.name\",\"subject\":\"Per/bb23d602-d585-43e8-a9b6-3dda50c2d09e\",\"timestamp\":\"#{Time.new(2019, 12, 10, 12, 18, 44).iso8601}\",\"version\":\"1.2.3\",\"payload\":{}}}",
         headers: {
           "Authorization" => "Basic dGVzdF9hcHA6c2VjcmV0",
           "Content-Type" => "application/json",
