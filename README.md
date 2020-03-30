@@ -58,7 +58,7 @@ Zaikio::Loom.fire_event(
 )
 ```
 
-This example would publish an event to Zaikio Loom with a random UUID and the current timestamp.
+This example would publish an event (in the background) to Zaikio Loom with a random UUID and the current timestamp.
 
 If you need more control over the published event, for example:
 

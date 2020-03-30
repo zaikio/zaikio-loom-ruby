@@ -38,6 +38,21 @@ module Zaikio
         response.is_a?(Net::HTTPSuccess)
       end
 
+      def to_h # rubocop:disable Metrics/MethodLength
+        timestamp = @timestamp || Time.now.getutc
+
+        {
+          id:        @id,
+          name:      @event_name,
+          subject:   @subject,
+          timestamp: timestamp.iso8601,
+          receiver:  @receiver,
+          version:   @version,
+          payload:   @payload,
+          link:      @link
+        }.compact
+      end
+
       private
 
       def build_request(uri)
@@ -52,24 +67,8 @@ module Zaikio
         Zaikio::Loom.configuration
       end
 
-      def event_as_json # rubocop:disable Metrics/MethodLength
-        timestamp = @timestamp || Time.now.getutc
-
-        Oj.dump(
-          {
-            event: {
-              id:        @id,
-              name:      @event_name,
-              subject:   @subject,
-              timestamp: timestamp.iso8601,
-              receiver:  @receiver,
-              version:   @version,
-              payload:   @payload,
-              link:      @link
-            }.compact
-          },
-          mode: :compat
-        )
+      def event_as_json
+        Oj.dump({ event: to_h }, mode: :compat)
       end
     end
   end

@@ -20,15 +20,11 @@ class Zaikio::LoomTest < Minitest::Test
     assert_match "loom.zaikio.test", Zaikio::Loom.configuration.host
   end
 
-  def test_that_helper_method_delegates_to_instance_method
-    mock = Minitest::Mock.new
-    mock.expect :call, mock, [:event_name, payload: { foo: "bar" }]
-    mock.expect :fire, nil
+  def test_that_helper_method_performs_fire_event_job
+    event = OpenStruct.new()
+    Zaikio::Loom::Event.expects(:new).returns(event)
+    Zaikio::Loom::FireEventJob.expects(:perform_later).with(event)
 
-    Zaikio::Loom::Event.stub(:new, mock) do
-      Zaikio::Loom.fire_event(:event_name, payload: { foo: "bar" })
-    end
-
-    mock.verify
+    Zaikio::Loom.fire_event(:event_name, payload: { foo: "bar" })
   end
 end
