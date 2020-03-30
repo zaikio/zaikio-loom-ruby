@@ -1,5 +1,9 @@
 # Zaikio Loom Ruby Gem Changelog
 
+## 0.2.1 - 2020-03-30
+
+- Fix bug with event serialization
+
 ## 0.2.0 - 2020-03-30
 
 - Events are now fired in background with ActiveJob.
