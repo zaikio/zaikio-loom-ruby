@@ -6,12 +6,14 @@ module Zaikio
       end
 
       def serialize(event)
-        super(event.to_h)
+        super(event.to_h.stringify_keys)
       end
 
       def deserialize(hash)
-        name = hash.delete('name')
-        Event.new(name, hash)
+        name = hash.delete('name').split('.').last
+        timestamp = DateTime.parse(hash.delete('timestamp'))
+        hash.delete('_aj_serialized')
+        Event.new(name, hash.symbolize_keys.merge(timestamp: timestamp))
       end
     end
   end
