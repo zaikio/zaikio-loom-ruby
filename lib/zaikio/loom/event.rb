@@ -8,7 +8,7 @@ module Zaikio
       attr_reader :status_code, :response_body
 
       def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/ParameterLists
-        @event_name = "#{configuration.app_name}.#{name}"
+        @event_name = name.to_s.split(".").size == 1 ? "#{configuration.app_name}.#{name}" : name.to_s
         @id         = id || SecureRandom.uuid
         @link       = link
         @payload    = payload
@@ -55,9 +55,17 @@ module Zaikio
 
       private
 
+      def app_name
+        @event_name.split(".").first
+      end
+
+      def app_password
+        configuration.clients[app_name].password
+      end
+
       def build_request(uri)
         Net::HTTP::Post.new(uri, "User-Agent" => "zaikio-loom:#{Zaikio::Loom::VERSION}").tap do |request|
-          request.basic_auth(configuration.app_name, configuration.password)
+          request.basic_auth(app_name, app_password)
           request.body         = event_as_json
           request.content_type = "application/json"
         end
