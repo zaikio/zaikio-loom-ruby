@@ -8,7 +8,7 @@ module Zaikio
       attr_reader :status_code, :response_body
 
       def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/ParameterLists
-        @event_name = name.to_s.split(".").size == 1 ? "#{configuration.app_name}.#{name}" : name.to_s
+        @event_name = name.to_s.count(".").zero? ? "#{configuration.app_name}.#{name}" : name.to_s
         @id         = id || SecureRandom.uuid
         @link       = link
         @payload    = payload
