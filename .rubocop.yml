@@ -2,6 +2,7 @@ AllCops:
   TargetRubyVersion: 2.6
   Exclude:
     - test/**/*.rb
+  NewCops: enable
 
 require:
   - rubocop-performance
