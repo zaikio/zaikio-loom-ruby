@@ -5,7 +5,7 @@ require "securerandom"
 module Zaikio
   module Loom
     class Event
-      attr_reader :status_code, :response_body
+      attr_reader :id, :status_code, :response_body
 
       def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/ParameterLists
         @event_name = "#{configuration.app_name}.#{name}"
@@ -23,6 +23,8 @@ module Zaikio
       end
 
       def fire # rubocop:disable Metrics/AbcSize
+        log_event
+
         return false unless configuration.password && configuration.host
 
         uri = URI("#{configuration.host}/api/v1/events")
@@ -68,7 +70,11 @@ module Zaikio
       end
 
       def event_as_json
-        Oj.dump({ event: to_h }, mode: :compat)
+        @event_as_json ||= Oj.dump({ event: to_h }, mode: :compat)
+      end
+
+      def log_event
+        configuration.logger.info("Zaikio::Loom event\n#{event_as_json}")
       end
     end
   end

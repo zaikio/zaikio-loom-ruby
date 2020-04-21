@@ -2,8 +2,11 @@ require "test_helper"
 
 class Zaikio::Loom::EventTest < Minitest::Test
   def setup
+    @log, pipe = IO.pipe
+
     Zaikio::Loom.configure do |config|
       config.environment = :test
+      config.logger = Logger.new(pipe)
       config.app_name = "test_app"
       config.password = "secret"
       config.version = "1.2.3"
@@ -30,6 +33,15 @@ class Zaikio::Loom::EventTest < Minitest::Test
       .to_return(status: 200, body: "", headers: {})
 
     assert event.fire
+  end
+
+  def test_that_it_does_not_fail_in_unknown_environments
+    Zaikio::Loom.configuration.environment = :staging
+
+    refute event.fire
+
+    assert @log.gets.include?('Zaikio::Loom event')
+    assert @log.gets.include?(event.id)
   end
 
   def test_that_it_returns_error_message_on_failure

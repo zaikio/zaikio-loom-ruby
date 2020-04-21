@@ -17,7 +17,7 @@ class Zaikio::Loom::EventSerializerTest < Minitest::Test
   end
 
   def serializer
-    Zaikio::Loom::EventSerializer#.new
+    Zaikio::Loom::EventSerializer
   end
 
   def test_that_it_serializes_correctly
