@@ -1,5 +1,9 @@
 # Zaikio Loom Ruby Gem Changelog
 
+## 0.3.0 - 2020-04-22
+
+- Do not send events to Loom in development or staging environment
+
 ## 0.2.1 - 2020-03-30
 
 - Fix bug with event serialization
