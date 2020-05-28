@@ -10,13 +10,12 @@ module Zaikio
       }.freeze
 
       attr_accessor :version
-      attr_reader :environment, :host, :clients, :app_name
+      attr_reader :environment, :host, :apps
       attr_writer :logger
 
       def initialize
         @environment = :sandbox
-        @clients = {}
-        @app_name = nil
+        @apps = {}
       end
 
       def logger
@@ -28,22 +27,9 @@ module Zaikio
         @host = HOSTS[environment]
       end
 
-      def app_name=(app_name)
-        @app_name = app_name.to_s
-        @clients[@app_name] = ClientConfiguration.new(@app_name)
-      end
-
-      def password
-        @clients[app_name].password
-      end
-
-      def password=(password)
-        @clients[app_name].password = password
-      end
-
-      def add_client(name)
-        @clients[name.to_s] = ClientConfiguration.new(name.to_s)
-        yield(@clients[name.to_s])
+      def application(name)
+        @apps[name.to_s] = AppConfiguration.new(name.to_s)
+        yield(@apps[name.to_s])
       end
     end
   end

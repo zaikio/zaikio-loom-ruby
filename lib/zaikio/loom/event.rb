@@ -8,7 +8,7 @@ module Zaikio
       attr_reader :id, :status_code, :response_body
 
       def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/ParameterLists
-        @event_name = name.to_s.count(".").zero? ? "#{configuration.app_name}.#{name}" : name.to_s
+        @event_name = name.to_s.count(".").zero? ? "#{configuration.apps.values.first.app_name}.#{name}" : name.to_s
         @id         = id || SecureRandom.uuid
         @link       = link
         @payload    = payload
@@ -17,7 +17,7 @@ module Zaikio
         @timestamp  = timestamp
         @version    = version || configuration.version
 
-        return if configuration.password
+        return if app_password
 
         configuration.logger.error("Zaikio::Loom is disabled – event password is missing")
       end
@@ -25,7 +25,7 @@ module Zaikio
       def fire # rubocop:disable Metrics/AbcSize
         log_event
 
-        return false unless configuration.password && configuration.host
+        return false unless app_password && configuration.host
 
         uri = URI("#{configuration.host}/api/v1/events")
 
@@ -62,7 +62,7 @@ module Zaikio
       end
 
       def app_password
-        configuration.clients[app_name].password
+        configuration.apps[app_name].password
       end
 
       def build_request(uri)

@@ -1,6 +1,6 @@
 module Zaikio
   module Loom
-    class ClientConfiguration
+    class AppConfiguration
       attr_accessor :app_name, :password
 
       def initialize(app_name)
