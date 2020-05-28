@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "oj"
-  spec.add_dependency "rails", '~> 6.0', '>= 6.0.2.2'
+  spec.add_dependency "rails", "~> 6.0", ">= 6.0.2.2"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "minitest"

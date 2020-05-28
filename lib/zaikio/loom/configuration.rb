@@ -4,11 +4,9 @@ module Zaikio
   module Loom
     class Configuration
       HOSTS = {
-        development: "http://loom.zaikio.test",
-        test:        "http://loom.zaikio.test",
-        staging:     "https://loom.staging.zaikio.com",
-        sandbox:     "https://loom.sandbox.zaikio.com",
-        production:  "https://loom.zaikio.com"
+        test:       "http://loom.zaikio.test",
+        sandbox:    "https://loom.sandbox.zaikio.com",
+        production: "https://loom.zaikio.com"
       }.freeze
 
       attr_accessor :version
