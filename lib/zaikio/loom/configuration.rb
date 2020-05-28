@@ -25,7 +25,7 @@ module Zaikio
 
       def environment=(env)
         @environment = env.to_sym
-        @host = host_for(environment)
+        @host = HOSTS[environment]
       end
 
       def app_name=(app_name)
@@ -44,14 +44,6 @@ module Zaikio
       def add_client(name)
         @clients[name.to_s] = ClientConfiguration.new(name.to_s)
         yield(@clients[name.to_s])
-      end
-
-      private
-
-      def host_for(environment)
-        HOSTS.fetch(environment) do
-          raise StandardError.new, "Invalid Zaikio::Loom environment '#{environment}'"
-        end
       end
     end
   end
