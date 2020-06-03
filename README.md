@@ -35,14 +35,32 @@ Zaikio::Loom.configure do |config|
 
   # The name of your application like it is named in the directory of the
   # choosen enviroment.
-  config.app_name = 'my_application'
-
-  # Your application's event password for the choosen environment
-  # Do not add this password into version control.
-  config.password = ENV.fetch('ZAIKIO_LOOM_PASSWORD')
+  config.application 'my_application' do |app|
+    # Your application's event password for the choosen environment
+    # Do not add this password into version control.
+    app.password = ENV.fetch('ZAIKIO_LOOM_PASSWORD')
+  end
 
   # The version of the event's payload format and structure
   config.version = '1.0'
+end
+```
+
+#### Multiple Clients
+
+```ruby
+# in config/initializers/zaikio_loom.rb
+Zaikio::Loom.configure do |config|
+  config.environment = :sandbox
+  config.version = '1.0'
+
+  config.application 'my_application' do |app|
+    app.password = ENV.fetch('ZAIKIO_LOOM_PASSWORD')
+  end
+
+  config.application 'my_other_app' do |app|
+    app.password = ENV.fetch('ZAIKIO_LOOM_OTHER_APP_PASSWORD')
+  end
 end
 ```
 
@@ -59,6 +77,16 @@ Zaikio::Loom.fire_event(
 ```
 
 This example would publish an event (in the background) to Zaikio Loom with a random UUID and the current timestamp.
+
+If you want to publish the event for a specific client, you have to add it as part of the event name:
+
+```rb
+Zaikio::Loom.fire_event(
+  'my_other_app.event_name',
+  subject: 'Org/3a242896-fa57-41ba-997e-8c212d7157f3',
+  payload: { foo: 'bar', baz: [1, 2, 3] }
+)
+```
 
 If you need more control over the published event, for example:
 

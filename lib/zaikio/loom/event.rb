@@ -7,8 +7,8 @@ module Zaikio
     class Event
       attr_reader :id, :status_code, :response_body
 
-      def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/ParameterLists
-        @event_name = "#{configuration.app_name}.#{name}"
+      def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/AbcSize, Metrics/ParameterLists
+        @event_name = name.to_s.count(".").zero? ? "#{configuration.apps.values.first.app_name}.#{name}" : name.to_s
         @id         = id || SecureRandom.uuid
         @link       = link
         @payload    = payload
@@ -17,7 +17,7 @@ module Zaikio
         @timestamp  = timestamp
         @version    = version || configuration.version
 
-        return if configuration.password
+        return if app_password
 
         configuration.logger.error("Zaikio::Loom is disabled – event password is missing")
       end
@@ -25,7 +25,7 @@ module Zaikio
       def fire # rubocop:disable Metrics/AbcSize
         log_event
 
-        return false unless configuration.password && configuration.host
+        return false unless app_password && configuration.host
 
         uri = URI("#{configuration.host}/api/v1/events")
 
@@ -57,9 +57,17 @@ module Zaikio
 
       private
 
+      def app_name
+        @event_name.split(".").first
+      end
+
+      def app_password
+        configuration.apps[app_name].password
+      end
+
       def build_request(uri)
         Net::HTTP::Post.new(uri, "User-Agent" => "zaikio-loom:#{Zaikio::Loom::VERSION}").tap do |request|
-          request.basic_auth(configuration.app_name, configuration.password)
+          request.basic_auth(app_name, app_password)
           request.body         = event_as_json
           request.content_type = "application/json"
         end

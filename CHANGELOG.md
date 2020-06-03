@@ -1,5 +1,10 @@
 # Zaikio Loom Ruby Gem Changelog
 
+## 1.0.0 - 2020-06-03
+
+- Add multi client support
+- Confguration format changed
+
 ## 0.3.0 - 2020-04-22
 
 - Do not send events to Loom in development or staging environment

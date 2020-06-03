@@ -1,3 +1,4 @@
+require "zaikio/loom/app_configuration"
 require "zaikio/loom/configuration"
 require "zaikio/loom/event"
 require "zaikio/loom/event_serializer"

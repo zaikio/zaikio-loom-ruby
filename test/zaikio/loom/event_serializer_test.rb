@@ -4,8 +4,11 @@ class Zaikio::Loom::EventSerializerTest < Minitest::Test
   def setup
     Zaikio::Loom.configure do |config|
       config.environment = :test
-      config.app_name = "test_app"
-      config.password = "secret"
+
+      config.application "test_app" do |app|
+        app.password = "secret"
+      end
+
       config.version = "1.2.3"
     end
   end

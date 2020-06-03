@@ -9,12 +9,13 @@ module Zaikio
         production: "https://loom.zaikio.com"
       }.freeze
 
-      attr_accessor :app_name, :password, :version
-      attr_reader :environment, :host
+      attr_accessor :version
+      attr_reader :environment, :host, :apps
       attr_writer :logger
 
       def initialize
         @environment = :sandbox
+        @apps = {}
       end
 
       def logger
@@ -24,6 +25,11 @@ module Zaikio
       def environment=(env)
         @environment = env.to_sym
         @host = HOSTS[environment]
+      end
+
+      def application(name)
+        @apps[name.to_s] = AppConfiguration.new(name.to_s)
+        yield(@apps[name.to_s])
       end
     end
   end
