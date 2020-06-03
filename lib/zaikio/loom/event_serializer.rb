@@ -10,7 +10,7 @@ module Zaikio
       end
 
       def deserialize(hash)
-        name = hash.delete("name").split(".").last
+        name = hash.delete("name")
         timestamp = DateTime.parse(hash.delete("timestamp"))
         hash.delete("_aj_serialized")
         Event.new(name, **hash.symbolize_keys.merge(timestamp: timestamp))
