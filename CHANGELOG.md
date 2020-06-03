@@ -2,6 +2,10 @@
 
 ## 1.0.0 - 2020-06-03
 
+- Fix a bug in the event serializer
+
+## 1.0.0 - 2020-06-03
+
 - Add multi client support
 - Confguration format changed
 
