@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zaikio-loom (0.3.0)
+    zaikio-loom (1.0.0)
       oj
       rails (~> 6.0, >= 6.0.2.2)
 
@@ -160,9 +160,9 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    websocket-driver (0.7.1)
+    websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     zeitwerk (2.3.0)
 
 PLATFORMS

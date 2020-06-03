@@ -7,7 +7,7 @@ module Zaikio
     class Event
       attr_reader :id, :status_code, :response_body
 
-      def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/ParameterLists
+      def initialize(name, subject:, id: nil, link: nil, payload: nil, receiver: nil, timestamp: nil, version: nil) # rubocop:disable Metrics/AbcSize, Metrics/ParameterLists
         @event_name = name.to_s.count(".").zero? ? "#{configuration.apps.values.first.app_name}.#{name}" : name.to_s
         @id         = id || SecureRandom.uuid
         @link       = link
