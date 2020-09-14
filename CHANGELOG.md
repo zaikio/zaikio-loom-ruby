@@ -1,5 +1,9 @@
 # Zaikio Loom Ruby Gem Changelog
 
+## master
+
+- Update dependencies and minimum Ruby version
+
 ## 1.0.0 - 2020-06-03
 
 - Fix a bug in the event serializer
