@@ -23,8 +23,9 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "oj"
+  spec.add_dependency "nokogiri", ">= 1.11.0"
   spec.add_dependency "rails", "~> 6.0", ">= 6.0.2.3"
+  spec.add_runtime_dependency "oj"
   spec.required_ruby_version = ">= 2.7.1"
 
   spec.add_development_dependency "bundler"
