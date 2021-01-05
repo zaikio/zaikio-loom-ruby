@@ -2,9 +2,11 @@
 
 ## master
 
-- Update dependencies and minimum Ruby version
+## 1.1.0 - 2021-01-05
 
-## 1.0.0 - 2020-06-03
+- Ensure compability with Ruby 3.0 and Ruby on Rails 6.1
+
+## 1.0.1 - 2020-06-03
 
 - Fix a bug in the event serializer
 

@@ -5,7 +5,9 @@ AllCops:
   NewCops: enable
 
 require:
+  - rubocop-minitest
   - rubocop-performance
+  - rubocop-rake
 
 Layout/HashAlignment:
   EnforcedColonStyle: table
