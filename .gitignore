@@ -8,5 +8,6 @@
 /tmp/
 .gem
 .DS_Store
+Gemfile.lock
 test/dummy/tmp
 test/dummy/log
