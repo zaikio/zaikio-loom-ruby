@@ -2,6 +2,10 @@
 
 ## master
 
+## 1.1.1 - 2021-03-25
+
+ * Replace dependency on `rails` with a more specific dependency on `railties` and friends
+
 ## 1.1.0 - 2021-01-05
 
 - Ensure compability with Ruby 3.0 and Ruby on Rails 6.1
