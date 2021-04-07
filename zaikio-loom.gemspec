@@ -8,11 +8,11 @@ Gem::Specification.new do |spec|
 
   spec.authors  = ["crispymtn", "Martin Spickermann"]
   spec.email    = ["op@crispymtn.com", "spickermann@gmail.com"]
-  spec.homepage = "https://github.com/zaikio/zai-loom-ruby"
+  spec.homepage = "https://github.com/zaikio/zaikio-loom-ruby"
   spec.license  = "MIT"
   spec.summary  = "The Zaikio Loom Ruby Gem simplifies publishing events on the Zaikio Loom event system."
 
-  spec.metadata["changelog_uri"] = "https://github.com/zaikio/zai-loom-ruby/blob/master/CHANGELOG.md"
+  spec.metadata["changelog_uri"] = "https://github.com/zaikio/zaikio-loom-ruby/blob/master/CHANGELOG.md"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
 
