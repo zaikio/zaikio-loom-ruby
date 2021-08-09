@@ -3,6 +3,8 @@ version: 2
 updates:
 - package-ecosystem: bundler
   directory: "/"
+  reviewers:
+  - jalyna
   schedule:
     interval: daily
     time: "04:00"
