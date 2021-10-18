@@ -76,8 +76,8 @@ class Zaikio::Loom::EventTest < Minitest::Test
     stub_request(:post, "http://loom.zaikio.test/api/v1/events")
       .to_return(status: 422, body: "{\"errors\":{\"name\":[\"can't be blank\"]}}", headers: {})
 
-    refute event.fire
-    assert_equal 422, event.status_code
-    assert_equal "{\"errors\":{\"name\":[\"can't be blank\"]}}", event.response_body
+    assert_raises Zaikio::Loom::Error, 'Sending event failed (422): {"errors":{"name":["can\'t be blank"]}}' do
+      event.fire
+    end
   end
 end
