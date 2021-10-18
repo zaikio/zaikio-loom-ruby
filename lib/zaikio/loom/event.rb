@@ -37,6 +37,14 @@ module Zaikio
         @status_code   = response.code.to_i
         @response_body = response.body
 
+        unless response.is_a?(Net::HTTPSuccess)
+          raise Zaikio::Loom::Error.new(
+            "Sending event failed (#{@status_code}): #{@response_body}",
+            body: @response_body,
+            status_code: @status_code
+          )
+        end
+
         response.is_a?(Net::HTTPSuccess)
       end
 

@@ -1,6 +1,8 @@
 # Zaikio Loom Ruby Gem Changelog
 
-## master
+## [Unreleased]
+
+- **BREAKING** Fixed: Throw new `Zaikio::Loom::Error` when posting events fails (e.g. 422)
 
 ## 1.1.1 - 2021-03-25
 
