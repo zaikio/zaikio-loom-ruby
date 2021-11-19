@@ -10,7 +10,7 @@ module Zaikio
       }.freeze
 
       attr_accessor :version
-      attr_reader :environment, :host, :apps
+      attr_reader :environment, :host, :apps, :queue
       attr_writer :logger
 
       def initialize
@@ -25,6 +25,10 @@ module Zaikio
       def environment=(env)
         @environment = env.to_sym
         @host = HOSTS[environment]
+      end
+
+      def queue=(name)
+        Zaikio::Loom::FireEventJob.queue_as(name)
       end
 
       def application(name)
