@@ -35,4 +35,20 @@ class Zaikio::LoomTest < Minitest::Test
 
     Zaikio::Loom.fire_event(:event_name, payload: { foo: "bar" })
   end
+
+  def test_configure_queue
+    job = Zaikio::Loom::FireEventJob.perform_later(nil)
+    assert_equal "default", job.queue_name
+
+    Zaikio::Loom.configure do |config|
+      config.queue = :high_prio
+    end
+
+    job = Zaikio::Loom::FireEventJob.perform_later(nil)
+    assert_equal "high_prio", job.queue_name
+
+    Zaikio::Loom.configure do |config|
+      config.queue = nil
+    end
+  end
 end

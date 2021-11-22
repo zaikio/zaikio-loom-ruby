@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Support configuration of `queue` for FireEventJob
+
 ## 1.2.0 - 2021-10-18
 
 - **BREAKING** Fixed: Throw new `Zaikio::Loom::Error` when posting events fails (e.g. 422)
