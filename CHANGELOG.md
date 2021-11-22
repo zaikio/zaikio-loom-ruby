@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## 1.3.0 - 2021-11-22
+
 - Support configuration of `queue` for FireEventJob
 
 ## 1.2.0 - 2021-10-18
