@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- Ignore `"subject":["not found"]` errors
+- Log responses
+
 ## 1.3.0 - 2021-11-22
 
 - Support configuration of `queue` for FireEventJob

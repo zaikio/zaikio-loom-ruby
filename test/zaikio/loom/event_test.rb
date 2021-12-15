@@ -80,4 +80,12 @@ class Zaikio::Loom::EventTest < Minitest::Test
       event.fire
     end
   end
+
+  def test_that_it_ignore_subject_not_found
+    stub_request(:post, "http://loom.zaikio.test/api/v1/events")
+      .to_return(status: 422, body: "{\"errors\":{\"subject\":[\"not found\"]}}", headers: {})
+
+    refute event.fire
+    assert_equal 422, event.status_code
+  end
 end

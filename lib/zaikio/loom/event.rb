@@ -36,11 +36,13 @@ module Zaikio
 
         @status_code   = response.code.to_i
         @response_body = response.body
+        log_response
 
-        unless response.is_a?(Net::HTTPSuccess)
+        if !response.is_a?(Net::HTTPSuccess) && !(@status_code == 422 &&
+          JSON.parse(@response_body).dig("errors", "subject")&.include?("not found"))
           raise Zaikio::Loom::Error.new(
             "Sending event failed (#{@status_code}): #{@response_body}",
-            body: @response_body,
+            body:        @response_body,
             status_code: @status_code
           )
         end
@@ -91,6 +93,10 @@ module Zaikio
 
       def log_event
         configuration.logger.info("Zaikio::Loom event\n#{event_as_json}")
+      end
+
+      def log_response
+        configuration.logger.info("Zaikio::Loom event\n#{@id}\n#{@status_code}\n#{@response_body}")
       end
     end
   end
