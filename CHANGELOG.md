@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## 1.3.1 - 2022-01-07
+
+- Permit Rails 7
+
 ## 1.3.0 - 2021-11-22
 
 - Support configuration of `queue` for FireEventJob
