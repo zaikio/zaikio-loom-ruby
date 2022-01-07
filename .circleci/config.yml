@@ -1,9 +1,12 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/ruby:3.0.0
-      - image: circleci/redis:3.2-alpine
+      - image: cimg/ruby:3.0.3
+        environment:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
 
     working_directory: ~/repo
 
@@ -12,22 +15,53 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-{{ checksum "zaikio-loom.gemspec" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run:
           name: install dependencies
-          command: |
-            gem install bundler:2.1.4 && bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: gem install bundler && bundle install
 
       - save_cache:
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "zaikio-loom.gemspec" }}
 
-      # run tests!
+      - run: bundle exec rake test
+
+  publish:
+    docker:
+      - image: cimg/ruby:3.0.3
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
       - run:
-          name: run tests
+          name: Build package
+          command: gem build zaikio-loom.gemspec
+      - run:
+          name: Push package
           command: |
-            bundle exec rake test
+            VERSION=$(ruby -r "./lib/zaikio/loom/version.rb" -e "print Zaikio::Loom::VERSION")
+            gem push zaikio-loom-${VERSION}.gem
+
+workflows:
+  default:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - publish:
+          context:
+            - rubygems-push
+          requires: [test]
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
