@@ -22,7 +22,7 @@ module Zaikio
         configuration.logger.error("Zaikio::Loom is disabled – event password is missing")
       end
 
-      def fire # rubocop:disable Metrics/AbcSize
+      def fire # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         log_event
 
         return false unless app_password && configuration.host
@@ -40,7 +40,7 @@ module Zaikio
         unless response.is_a?(Net::HTTPSuccess)
           raise Zaikio::Loom::Error.new(
             "Sending event failed (#{@status_code}): #{@response_body}",
-            body: @response_body,
+            body:        @response_body,
             status_code: @status_code
           )
         end
