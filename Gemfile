@@ -6,4 +6,3 @@ gemspec
 gem "actionpack"
 gem "actionview"
 gem "activemodel"
-gem "sprockets-rails"
