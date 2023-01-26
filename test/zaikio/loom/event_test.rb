@@ -64,7 +64,7 @@ class Zaikio::Loom::EventTest < Minitest::Test
   end
 
   def test_that_it_does_not_fail_in_unknown_environments
-    Zaikio::Loom.configuration.environment = :staging
+    Zaikio::Loom.configuration.environment = :unknown
 
     refute event.fire
 

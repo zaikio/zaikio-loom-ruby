@@ -5,6 +5,7 @@ module Zaikio
     class Configuration
       HOSTS = {
         test:       "http://loom.zaikio.test",
+        staging:    "https://loom.staging.zaikio.com",
         sandbox:    "https://loom.sandbox.zaikio.com",
         production: "https://loom.zaikio.com"
       }.freeze
