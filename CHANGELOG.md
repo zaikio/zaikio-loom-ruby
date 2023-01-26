@@ -2,7 +2,10 @@
 
 ## [Unreleased]
 
+## 1.4.0 - 2023-01-26
+
 - Support `staging` environment to allow internal testing
+- Require ruby > 3.0.0
 
 ## 1.3.1 - 2022-01-07
 
