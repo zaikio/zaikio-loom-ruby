@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Support `staging` environment to allow internal testing
+
 ## 1.3.1 - 2022-01-07
 
 - Permit Rails 7
